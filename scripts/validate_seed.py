@@ -23,7 +23,7 @@ def main():
     assert customer_df.shape == (5630, 20), "电商用户原始数据形状不正确"
 
     notebook_paths = sorted((ROOT / "notebooks").glob("*.ipynb"))
-    assert len(notebook_paths) == 3, "种子项目应只包含3个学生Notebook"
+    assert len(notebook_paths) == 4, "种子项目应只包含4个学生Notebook"
     assert not any("teacher" in path.name.lower() for path in notebook_paths), \
         "种子项目不应包含教师Notebook"
 
@@ -44,7 +44,9 @@ def main():
         print(f"通过：{path.relative_to(ROOT)}，cells={len(nb['cells'])}")
 
     completed_outputs = list((ROOT / "output").rglob("*.csv"))
+    completed_images = list((ROOT / "output").rglob("*.png"))
     assert not completed_outputs, "种子项目不应预置已完成的学生CSV成果"
+    assert not completed_images, "种子项目不应预置已完成的学生PNG成果"
 
     print(f"通过：{product_path.relative_to(ROOT)}，shape={product_df.shape}")
     print(f"通过：{customer_path.relative_to(ROOT)}，shape={customer_df.shape}")
